@@ -93,12 +93,16 @@ public class TestingHttpServer
 
     public URI getBaseUrl()
     {
-        return httpServerInfo.getHttpUri();
+        URI baseUrl = httpServerInfo.getHttpsUri();
+        if (baseUrl == null) {
+            baseUrl = httpServerInfo.getHttpUri();
+        }
+        return baseUrl;
     }
 
     public int getPort()
     {
-        return httpServerInfo.getHttpUri().getPort();
+        return getBaseUrl().getPort();
     }
 
     public HttpServerInfo getHttpServerInfo()
